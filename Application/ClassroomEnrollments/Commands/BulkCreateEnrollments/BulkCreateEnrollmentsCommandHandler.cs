@@ -1,6 +1,6 @@
 using MediatR;
 using Domain.Entities;
-using Application.Repositories;
+using Application.Interfaces.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Domain.Constants;

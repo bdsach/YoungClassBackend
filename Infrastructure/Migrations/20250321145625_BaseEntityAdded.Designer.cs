@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ClassroomsDbContext))]
-    partial class ClassroomsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250321145625_BaseEntityAdded")]
+    partial class BaseEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +91,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("DateUTC")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime?>("DeletedUTC")
+                    b.Property<DateTime>("DeletedUTC")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsPresent")

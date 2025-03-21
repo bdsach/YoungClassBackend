@@ -8,6 +8,7 @@ internal class ClassroomsDbContext(DbContextOptions<ClassroomsDbContext> option)
 {
     internal DbSet<Classroom> Classrooms { get; set; }
     internal DbSet<ClassroomEnrollment> ClassroomEnrollments { get; set; }
+    internal DbSet<StudentAttendance> StudentAttendances { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -30,5 +31,16 @@ internal class ClassroomsDbContext(DbContextOptions<ClassroomsDbContext> option)
             .HasOne(e => e.Classroom)
             .WithMany(c => c.Enrollments)
             .HasForeignKey(e => e.ClassroomId);
+
+        modelBuilder.Entity<StudentAttendance>()
+            .HasOne(a => a.Student)
+            .WithMany(b => b.StudentAttendances)
+            .HasForeignKey(c => c.StudentId)
+            .HasPrincipalKey(d => d.Id);
+
+        modelBuilder.Entity<StudentAttendance>()
+           .HasOne(a => a.Classroom)
+            .WithMany(c => c.StudentAttendances)
+            .HasForeignKey(a => a.ClassroomId);
     }
 }

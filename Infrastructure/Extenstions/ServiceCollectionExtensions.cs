@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Application.Interfaces.Seeder;
 using Application.Interfaces.Services;
-using Application.Repositories;
+using Application.Interfaces.Repositories;
 using Infrastructure.Authorization;
 using Infrastructure.Authorization.Services;
 using Infrastructure.Persistence;
@@ -33,6 +33,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IClassroomsSeeder, ClassroomsSeeder>();
         services.AddScoped<IClassroomsRepository, ClassroomsRepository>();
         services.AddScoped<IClassroomEnrollmentsRepository, ClassroomEnrollmentsRepository>();
+        services.AddScoped<IStudentAttendanceRepository, StudentAttendanceRepository>();
 
         // services.AddAuthorizationBuilder()
         //     .AddPolicy(PolicyNames.HasNationality, 

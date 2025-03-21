@@ -3,13 +3,13 @@
 using Application.Users;
 using AutoMapper;
 using Domain.Entities;
-using Application.Repositories;
+using Application.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Classrooms.Commands.CreateClassroom;
 
-public class CreateClassroomCommandHandler(ILogger<CreateClassroomCommand> logger,
+public class CreateClassroomCommandHandler(ILogger<CreateClassroomCommandHandler> logger,
     IMapper mapper,
     IClassroomsRepository classroomsRepository,
     IUserContext userContext) : IRequestHandler<CreateClassroomCommand, int>

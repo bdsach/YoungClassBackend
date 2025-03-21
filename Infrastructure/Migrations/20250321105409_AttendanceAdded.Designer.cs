@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ClassroomsDbContext))]
-    partial class ClassroomsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250321105409_AttendanceAdded")]
+    partial class AttendanceAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,36 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Domain.Entities.Attendance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClassroomId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsPresent")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassroomId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Attendances");
+                });
 
             modelBuilder.Entity("Domain.Entities.Classroom", b =>
                 {
@@ -69,45 +102,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ClassroomId");
 
                     b.ToTable("ClassroomEnrollments");
-                });
-
-            modelBuilder.Entity("Domain.Entities.StudentAttendance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClassroomId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreatedUTC")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DateUTC")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("DeletedUTC")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsPresent")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedUTC")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassroomId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentAttendances");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -312,6 +306,25 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Attendance", b =>
+                {
+                    b.HasOne("Domain.Entities.Classroom", "Classroom")
+                        .WithMany("Attendances")
+                        .HasForeignKey("ClassroomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "Student")
+                        .WithMany("Attendances")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Classroom");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("Domain.Entities.Classroom", b =>
                 {
                     b.HasOne("Domain.Entities.User", "Owner")
@@ -333,25 +346,6 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Entities.User", "Student")
                         .WithMany("Enrollments")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Classroom");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Domain.Entities.StudentAttendance", b =>
-                {
-                    b.HasOne("Domain.Entities.Classroom", "Classroom")
-                        .WithMany("StudentAttendances")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.User", "Student")
-                        .WithMany("StudentAttendances")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -414,18 +408,18 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Classroom", b =>
                 {
-                    b.Navigation("Enrollments");
+                    b.Navigation("Attendances");
 
-                    b.Navigation("StudentAttendances");
+                    b.Navigation("Enrollments");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
+                    b.Navigation("Attendances");
+
                     b.Navigation("Enrollments");
 
                     b.Navigation("OwnedClassroom");
-
-                    b.Navigation("StudentAttendances");
                 });
 #pragma warning restore 612, 618
         }

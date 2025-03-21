@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Entities;
-using Application.Repositories;
+using Application.Interfaces.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
