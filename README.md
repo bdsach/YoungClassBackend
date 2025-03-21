@@ -66,13 +66,13 @@ dotnet add reference ../Infrastructure/Infrastructure.csproj
 #### Create Migration
 
 ```bash
-dotnet ef migrations add InitialCreate --project Restaurants.Infrastructure --startup-project Restaurants.API
+dotnet ef migrations add InitialCreate --project Infrastructure --startup-project API
 ```
 
 #### Update Database
 
 ```bash
-dotnet ef database update --project Restaurants.Infrastructure --startup-project Restaurants.API
+dotnet ef database update --project Infrastructure --startup-project API
 ```
 
 ### Common use
