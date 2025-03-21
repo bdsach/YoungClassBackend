@@ -75,6 +75,12 @@ dotnet ef migrations add InitialCreate --project Infrastructure --startup-projec
 dotnet ef database update --project Infrastructure --startup-project API
 ```
 
+#### Run
+
+```bash
+dotnet run --project API
+```
+
 ### Common use
 
 #### Create Migration
