@@ -3,7 +3,7 @@
 using Application.Users;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Repositories;
+using Application.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

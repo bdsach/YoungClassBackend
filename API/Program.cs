@@ -1,7 +1,7 @@
 using Serilog;
 using API.Middlewares;
 using Domain.Entities;
-using Domain.Interfaces.Seeder;
+using Application.Interfaces.Seeder;
 using Application.Extensions;
 using Infrastructure.Extensions;
 using API.Extensions;

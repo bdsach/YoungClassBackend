@@ -1,4 +1,4 @@
-using Domain.Exceptions;
+using Application.Exceptions;
 
 namespace API.Middlewares;
 

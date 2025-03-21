@@ -1,6 +1,6 @@
 using Domain.Constants;
 using Domain.Entities;
-using Domain.Interfaces.Seeder;
+using Application.Interfaces.Seeder;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 

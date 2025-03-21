@@ -1,5 +1,4 @@
-
-namespace Domain.Exceptions;
+namespace Application.Exceptions;
 
 public class ForbiddenException(): Exception
 {

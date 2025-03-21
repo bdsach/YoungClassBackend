@@ -2,7 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Application.Classrooms.Dtos;
-using Domain.Repositories;
+using Application.Repositories;
 
 namespace Application.Classrooms.Queries.GetAllClassrooms;
 

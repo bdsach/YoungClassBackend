@@ -1,7 +1,7 @@
 using Domain.Constants;
 using Domain.Entities;
 
-namespace Domain.Interfaces.Services;
+namespace Application.Interfaces.Services;
 
 public interface IClassroomAuthorizationService
 {

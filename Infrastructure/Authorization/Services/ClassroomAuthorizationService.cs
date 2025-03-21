@@ -1,7 +1,7 @@
 using Application.Users;
 using Domain.Constants;
 using Domain.Entities;
-using Domain.Interfaces.Services;
+using Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Authorization.Services;

@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Domain.Entities;
-using Domain.Exceptions;
+using Application.Exceptions;
 
 namespace Application.Users.Commands.UnassignUserRole;
 

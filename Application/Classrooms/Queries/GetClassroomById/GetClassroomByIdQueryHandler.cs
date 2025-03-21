@@ -1,8 +1,8 @@
 using MediatR;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Exceptions;
-using Domain.Repositories;
+using Application.Exceptions;
+using Application.Repositories;
 using Application.Classrooms.Dtos;
 using Microsoft.Extensions.Logging;
 

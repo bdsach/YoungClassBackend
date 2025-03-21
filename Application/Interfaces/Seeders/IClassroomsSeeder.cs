@@ -1,4 +1,4 @@
-namespace Domain.Interfaces.Seeder;
+namespace Application.Interfaces.Seeder;
 
 public interface IClassroomsSeeder
 {

@@ -1,8 +1,8 @@
 
 using Domain.Entities;
-using Domain.Interfaces.Seeder;
-using Domain.Interfaces.Services;
-using Domain.Repositories;
+using Application.Interfaces.Seeder;
+using Application.Interfaces.Services;
+using Application.Repositories;
 using Infrastructure.Authorization;
 using Infrastructure.Authorization.Services;
 using Infrastructure.Persistence;
