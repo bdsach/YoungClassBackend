@@ -17,7 +17,6 @@ public class BulkCreateEnrollmentsCommandHandler(
     {
         logger.LogInformation("ClassroomId {Classroom}", request.ClassroomId);
 
-        // var enrollments = mapper.Map<List<ClassroomEnrollment>>(request.Enrollments);
         var enrollments = new List<ClassroomEnrollment>();
 
         foreach (var enrollment in request.Enrollments)
@@ -41,6 +40,15 @@ public class BulkCreateEnrollmentsCommandHandler(
                     logger.LogError($"Failed to create user: {errors}");
                     throw new Exception($"Failed to create user: {errors}");
                 }
+
+                var addRoleResult = await userManager.AddToRoleAsync(newStudent, UserRoles.Student);
+                if (!addRoleResult.Succeeded)
+                {
+                    var roleErrors = string.Join(", ", addRoleResult.Errors.Select(e => e.Description));
+                    logger.LogError($"Failed to assign 'Student' role: {roleErrors}");
+                    throw new Exception($"Failed to assign 'Student' role: {roleErrors}");
+                }
+
                 existingUser = newStudent;
             }
 
