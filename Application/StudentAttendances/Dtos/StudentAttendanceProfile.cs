@@ -1,8 +1,8 @@
-namespace Application.StudentAttendance.Dtos
+namespace Application.StudentAttendances.Dtos
 {
     using AutoMapper;
     using Domain.Entities;
-    using Application.StudentAttendance.Commands.CreateAttendance;
+    using Application.StudentAttendances.Commands.CreateAttendance;
 
     public class StudentAttendanceProfile : Profile
     {

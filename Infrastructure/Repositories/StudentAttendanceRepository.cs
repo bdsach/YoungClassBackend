@@ -1,7 +1,6 @@
 using Domain.Entities;
 using Application.Interfaces.Repositories;
 using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 internal class StudentAttendanceRepository(ClassroomsDbContext dbContext) : IStudentAttendanceRepository
@@ -11,6 +10,13 @@ internal class StudentAttendanceRepository(ClassroomsDbContext dbContext) : IStu
         dbContext.StudentAttendances.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity.Id;
+    }
+
+    public async Task<int> BulkCreate(IEnumerable<StudentAttendance> entities)
+    {
+        await dbContext.StudentAttendances.AddRangeAsync(entities);
+        await dbContext.SaveChangesAsync();
+        return entities.Count();
     }
 
     public Task<IEnumerable<StudentAttendance>> GetAllAsync()
@@ -23,13 +29,14 @@ internal class StudentAttendanceRepository(ClassroomsDbContext dbContext) : IStu
         throw new NotImplementedException();
     }
 
-    public Task Delete(StudentAttendance entity)
+    public async Task Delete(StudentAttendance entity)
     {
-        throw new NotImplementedException();
+        dbContext.Remove(entity);
+        await dbContext.SaveChangesAsync();
     }
 
     public Task SaveChanges()
     {
-        throw new NotImplementedException();
+        return dbContext.SaveChangesAsync();
     }
 }

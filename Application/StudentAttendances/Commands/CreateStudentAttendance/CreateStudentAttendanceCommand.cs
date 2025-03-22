@@ -1,7 +1,7 @@
 using MediatR;
 using System.Text.Json.Serialization;
 
-namespace Application.StudentAttendance.Commands.CreateAttendance;
+namespace Application.StudentAttendances.Commands.CreateAttendance;
 
 public class CreateStudentAttendanceCommand : IRequest<int>
 {

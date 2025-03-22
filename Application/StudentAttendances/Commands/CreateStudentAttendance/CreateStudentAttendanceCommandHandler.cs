@@ -1,5 +1,5 @@
 
-namespace Application.StudentAttendance.Commands.CreateAttendance
+namespace Application.StudentAttendances.Commands.CreateAttendance
 {
     using MediatR;
     using AutoMapper;

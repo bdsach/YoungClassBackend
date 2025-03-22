@@ -27,13 +27,14 @@ internal class ClassroomsRepository(ClassroomsDbContext dbContext) : IClassrooms
         return classroom;
     }
 
-    public Task Delete(Classroom entity)
+    public async Task Delete(Classroom entity)
     {
-        throw new NotImplementedException();
+        dbContext.Remove(entity);
+        await dbContext.SaveChangesAsync();
     }
 
     public Task SaveChanges()
     {
-        throw new NotImplementedException();
+        return dbContext.SaveChangesAsync();
     }
 }

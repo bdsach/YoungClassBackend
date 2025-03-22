@@ -1,4 +1,3 @@
-
 using Domain.Entities;
 using Application.Interfaces.Repositories;
 using Infrastructure.Persistence;
@@ -57,13 +56,14 @@ internal class ClassroomEnrollmentsRepository(ClassroomsDbContext dbContext) : I
         throw new NotImplementedException();
     }
 
-    public Task Delete(ClassroomEnrollment entity)
+    public async Task Delete(ClassroomEnrollment entity)
     {
-        throw new NotImplementedException();
+        dbContext.Remove(entity);
+        await dbContext.SaveChangesAsync();
     }
 
     public Task SaveChanges()
     {
-        throw new NotImplementedException();
+        return dbContext.SaveChangesAsync();
     }
 }
