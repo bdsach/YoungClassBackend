@@ -34,6 +34,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IClassroomsRepository, ClassroomsRepository>();
         services.AddScoped<IClassroomEnrollmentsRepository, ClassroomEnrollmentsRepository>();
         services.AddScoped<IStudentAttendanceRepository, StudentAttendanceRepository>();
+        services.AddScoped<IStudentProfileRepository, StudentProfileRepository>();
 
         // services.AddAuthorizationBuilder()
         //     .AddPolicy(PolicyNames.HasNationality, 

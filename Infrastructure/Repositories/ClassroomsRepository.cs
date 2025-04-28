@@ -23,6 +23,9 @@ internal class ClassroomsRepository(ClassroomsDbContext dbContext) : IClassrooms
     public async Task<Classroom?> GetByIdAsync(int id)
     {
         var classroom = await dbContext.Classrooms
+            .Include(c => c.Enrollments)
+                .ThenInclude(e => e.Student)
+                    .ThenInclude(s => s.StudentProfile)
             .FirstOrDefaultAsync(c => c.Id == id);
         return classroom;
     }

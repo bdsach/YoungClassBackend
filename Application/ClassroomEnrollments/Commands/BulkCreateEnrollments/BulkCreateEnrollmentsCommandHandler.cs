@@ -10,7 +10,8 @@ namespace Application.ClassroomEnrollments.Commands.BulkCreateEnrollments;
 public class BulkCreateEnrollmentsCommandHandler(
     UserManager<User> userManager,
     ILogger<BulkCreateEnrollmentsCommandHandler> logger,
-    IClassroomEnrollmentsRepository classroomEnrollmentsRepository
+    IClassroomEnrollmentsRepository classroomEnrollmentsRepository,
+    IStudentProfileRepository studentProfileRepository
 ) : IRequestHandler<BulkCreateEnrollmentsCommand, int>
 {
     public async Task<int> Handle(BulkCreateEnrollmentsCommand request, CancellationToken cancellationToken)
@@ -51,6 +52,16 @@ public class BulkCreateEnrollmentsCommandHandler(
 
                 existingUser = newStudent;
             }
+
+            var userProfile = new StudentProfile
+            {
+                UserId = existingUser.Id,
+                StudentId = enrollment.StudentId,
+                FirstName = enrollment.FirstName,
+                LastName = enrollment.LastName,
+            };
+
+            await studentProfileRepository.Create(userProfile);
 
             var classroomEnrollment = new ClassroomEnrollment
             {
