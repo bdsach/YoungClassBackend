@@ -19,6 +19,14 @@ internal class ClassroomsRepository(ClassroomsDbContext dbContext) : IClassrooms
         var classrooms = await dbContext.Classrooms.ToListAsync();
         return classrooms;
     }
+    public async Task<IEnumerable<Classroom>> GetAllClassroomByTeacher(string userId)
+    {
+        var classrooms = await dbContext.Classrooms
+            .Where(c => c.OwnerId == userId)
+            .ToListAsync();
+
+        return classrooms;
+    }
 
     public async Task<Classroom?> GetByIdAsync(int id)
     {
