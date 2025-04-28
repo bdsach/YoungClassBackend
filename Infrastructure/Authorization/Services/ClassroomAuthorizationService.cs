@@ -15,7 +15,7 @@ public class ClassroomAuthorizationService(ILogger<ClassroomAuthorizationService
         logger.LogInformation("Authorizing user {UserEmail} to {Operation} for Classroom {ClassroomName}",
             user.Email,
             resourceOperation,
-            classroom.Name
+            classroom.Subject
         );
 
         if (resourceOperation == ResourceOperation.Create || resourceOperation == ResourceOperation.Read)
