@@ -4,7 +4,8 @@ namespace Application.Classrooms.Commands.CreateClassroom;
 
 public class CreateClassroomCommand : IRequest<int>
 {
-    public string Name { get; set; } = default!;
-    public string Description { get; set; } = default!;
-    public string Category { get; set; } = default!;
+    public string Subject { get; set; } = default!;
+    public string GradeLevel { get; set; } = default!;
+    public string Room { get; set; } = default!;
+    public string SubjectGroup { get; set; } = default!;
 }
